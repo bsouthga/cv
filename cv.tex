@@ -1,0 +1,210 @@
+\documentclass{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage{multicol, enumitem}
+\usepackage{color}
+\usepackage{mathtools, amsmath, amssymb}
+\usepackage{ifthen}
+% Font
+\usepackage{cmbright}
+% Unecessary Plotting
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{lipsum}
+
+\thispagestyle{empty}
+\setlength{\columnseprule}{0.5pt}
+\setlength{\columnsep}{25pt}
+\definecolor{steelblue}{HTML}{4682B4}
+\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
+\setlength\parindent{0pt}
+
+% Add an entry to a section
+\newcommand{\entry}[4][1]{
+  \vspace{0.5em}
+  \parbox{.75\linewidth}{\large #2 \hfill}%
+  \parbox{.25\linewidth}{\hfill \textit{\small #3}}\ifthenelse{\equal{#1}{1}}{}{
+
+    \vspace{5pt}
+    #1
+
+  }
+  \begin{description}[style=multiline,leftmargin=.8cm,itemsep=1pt]
+    \small
+    #4
+  \end{description}
+}
+
+% New section 
+\newcommand{\s}[2]{
+  \vspace{2em}
+  {
+    \textcolor{steelblue}{\LARGE #1}
+  
+    \hrulefill
+  }
+  #2
+}
+
+% Bullet used in lists
+\newcommand\bx[0]{$\quad \scriptscriptstyle \color{steelblue} \blacksquare$}
+
+% Plots in header
+\newcommand\graphs[0]{
+  \begin{tikzpicture}
+  \begin{axis}[
+      height=2.5cm,
+      width=4cm,
+      hide axis,
+      axis lines=left,
+      enlargelimits=false,
+  ]
+  \addplot [only marks, steelblue, mark size=1.5] table {\loadedtable};
+  \addplot [no markers, black, line width=1.5pt] table [y={create col/linear regression={y=y}}] {\loadedtable};
+
+  \end{axis}
+  \end{tikzpicture}     
+  \hspace{5pt}  
+  \begin{tikzpicture}[thick]
+  \begin{axis}[
+      height=2.5cm,
+      width=4cm,
+      hide axis,
+      axis lines=left,
+      enlargelimits=false,
+  ]
+  \addplot+ [no markers,
+            thick,
+            smooth,
+            domain=0:13,
+            fill=steelblue,
+            draw=white,
+            samples=100,
+            xbar=2pt,
+            hist={bins=6}] {rand};
+
+  \end{axis}
+  \end{tikzpicture}
+  \hspace{12pt}     
+  \scalebox{0.6}{
+    \begin{tikzpicture}
+      \node (1) {};
+      \node (2) [below left of=1] {};
+      \node (3) [below right of=1] {};
+      \node (4) [above right of=3] {};
+      \node (5) [above of=3] {};
+      \node (6) [above left of=1] {};
+
+
+      \path
+      (1) edge (2)
+      (3) edge (2)
+      (1) edge (5)
+      (2) edge (4)
+      (5) edge (4)
+      (5) edge (3)
+      (6) edge (1);
+
+    \end{tikzpicture} 
+  }    
+}
+
+% Actual Document content
+\begin{document}
+
+    % Tikz Settings
+    \tikzset{
+        every node/.style={
+            circle,
+            draw,
+            solid,
+            fill=steelblue,
+            inner sep=0pt,
+            minimum size=.5cm
+        }
+    }
+    % Generate random data for regression figure
+    \pgfmathsetseed{1138} % set the random seed
+    \pgfplotstableset{ % Define the equations for x and y
+        create on use/x/.style={create col/expr={42-2*\pgfplotstablerow}},
+        create on use/y/.style={create col/expr={(0.6*\thisrow{x}+130)+15*rand}}
+    }
+    % create a new table with 30 rows and columns x and y:
+    \pgfplotstablenew[columns={x,y}]{30}\loadedtable
+
+  % Begin text of resume
+  \textcolor{steelblue}{\Huge Ben Southgate}{\hfill\graphs}
+
+  \hrulefill
+
+  \begin{multicols}{2}
+
+    \s{Contact}{
+      \begin{description}[
+        itemsep=1pt,
+        style=multiline,
+        leftmargin=1.8cm,
+        font=\normalfont,
+        align=parright]
+        \item[Phone] $ \vcentcolon= $ (650) 465 - 0225
+        \item[Email] $ \vcentcolon= $ bsouthga@[urban.org (or) gmail.com]
+        \item[Github] $ \vcentcolon= $ github.com/bsouthga
+        \item[Blog] $ \vcentcolon= $ bensouthgate.com
+      \end{description}
+    }
+    \s{Education}{
+
+      \entry{Carleton College}{2009-2013}{
+        \item[\bx] B.A., major in economics (\textit{magna cum laude})
+        \item[\bx] Received distinction in major and senior thesis from economics department.
+        \item[\bx] Coursework: Data Mining, Data Structures, Econometrics, Linear Algebra, Multi-variable Calculus      
+      }
+      \entry{George Washington University}{2014-present}{
+        \item[\bx] Grad. Cert. Mathematics (expected 2015)
+        \item[\bx] Coursework: Mathematical Statistics, Real Analysis      
+      }
+    }
+    \s{Research Experience}{    
+      \entry[Urban Institute - Washington, DC]{Research Assistant}{2013-Present}{
+        \item[\bx] Quantitative research on retirement security and the welfare of older Americans
+        \item[\bx] Stata and SAS for survival analysis, group decomposition, (non) linear regression, and graphics generation
+        \item[\bx] Python for microsimulation, data cleaning and structure manipulation, and task automation, JavaScript for interactive data visualization development.
+      } 
+      \entry[University of Texas - Austin, TX]{Research Assistant}{2012}{
+        \item[\bx] Conducted primary research utilizing U.T. Austin freshman applicant data, resulting in a working paper entitled ``Race as a Consideration in the Creation of a Freshman Class: The University of Texas Case'' (co-author)
+        \item[\bx] Stata programming for various regression and descriptive analyses, as well as graphics generation
+      }
+    }
+    \s{Other Academic Experience}{  
+      \entry[Carleton College - Northfield, MN]{Teaching Assistant}{2012-2013}{
+        \item[\bx] Junior / Senior level Macroeconomic Theory Course (ECON 331), which included Growth Modeling, Dynamic Optimization, Interest Rate Targeting, and RBC Analysis
+        \item[\bx] Ran review sessions, developed graphical and mathematical review material in \LaTeX{}, and conducted individual tutoring sessions
+      }     
+    }
+    \s{Selected Publications}{
+
+      \entry{Independent Journals}{}{
+        \item[\bx] Benjamin G. Southgate. ``LOOP and the Internet Marketplace'', \textit{Michigan Journal of Business}, Volume 7 issue 2 (\textit{forthcoming})
+      }
+      \entry{Urban Institute}{}{
+        \item[\bx] Richard W. Johnson, Benjamin G. Southgate. ``How Will State and County Government Employees Fare under Kentucky's New Cash Balance Pension Plan?'', April 30, 2014
+
+        \item[\bx] Richard W. Johnson, Barbara Butrica, Owen Haaga, Benjamin G. Southgate. ``When Do State and Local Pension Plans Encourage Workers to Retire?'', April 30, 2014
+
+        \item[\bx] Richard W. Johnson, Barbara Butrica, Owen Haaga, Benjamin G. Southgate. ``How Long Must State and Local Employees Work to Accumulate Pension Benefits?'', April 30, 2014
+      }
+
+    } 
+    \s{Programming Experience}{
+      \begin{description}[style=multiline,leftmargin=1.7cm,itemsep=1pt]
+        \small
+        \item [Python] 3 years -  Pandas / Web Scraping / DTW
+        \item [Stata] 3 years - Regression Analysis / Decomposition
+        \item [\LaTeX] 3 years - Sweave / Stata integration
+        \item [R] 2 years - Regression Analysis / Data Mining
+        \item [Java] 2 years - Data Mining / Academic Exp.
+        \item [SAS] 1.5 years - Extensive Macro Programming
+        \item [JavaScript] 1 year - CoffeeScript / JQuery / D3 / Raphael 
+      \end{description}
+    }
+  \end{multicols}
+\end{document}
