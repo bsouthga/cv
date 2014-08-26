@@ -10,6 +10,13 @@
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\usetikzlibrary{shadows.blur}
+
 
 \thispagestyle{empty}
 \setlength{\columnseprule}{0.5pt}
@@ -17,6 +24,31 @@
 \definecolor{steelblue}{HTML}{4682B4}
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlength\parindent{0pt}
+
+ 
+\newlength{\forkmeoffset}
+\setlength{\forkmeoffset}{5em}
+\definecolor{forkmefg}{HTML}{EEEEEE}
+ 
+%
+% Credit to https://gist.github.com/jnothman/0729018fc39b2c30f082
+%
+\newcommand{\forkme}[1][west]{
+  \ifthenelse{\equal{#1}{east}}{%
+    \tikzset{forkmerot/.style={rotate=-45}}
+  }{%
+    \tikzset{forkmerot/.style={rotate=45}}
+  }
+  \begin{tikzpicture}[remember picture, overlay]
+  \node[forkmerot, shift={(0, -\forkmeoffset)}] at (current page.north #1) {
+    \begin{tikzpicture}
+    \node[fill=steelblue, text centered, minimum width=50em, minimum height=3.0em](fmogh) at (0pt, 0pt) {\textcolor{white}{\href{https://github.com/bsouthga/cv}{View on GitHub}}};
+    \draw[forkmefg!60, dashed, line width=.08em, dash pattern=on .5em off 1.5\pgflinewidth] (-25em,1.2em) rectangle (25em,-1.2em);
+    \end{tikzpicture}
+  };
+  \end{tikzpicture}
+}
+ 
 
 % Add an entry to a section
 \newcommand{\entry}[4][1]{
@@ -110,7 +142,7 @@
 
 % Actual Document content
 \begin{document}
-
+    \forkme
     % Tikz Settings
     \tikzset{
         every node/.style={
@@ -209,4 +241,6 @@
       \end{description}
     }
   \end{multicols}
+
+
 \end{document}
