@@ -27,7 +27,7 @@
 
  
 \newlength{\forkmeoffset}
-\setlength{\forkmeoffset}{5em}
+\setlength{\forkmeoffset}{6em}
 \definecolor{forkmefg}{HTML}{EEEEEE}
  
 %
@@ -42,7 +42,7 @@
   \begin{tikzpicture}[remember picture, overlay]
   \node[forkmerot, shift={(0, -\forkmeoffset)}] at (current page.north #1) {
     \begin{tikzpicture}
-    \node[fill=steelblue, text centered, minimum width=50em, minimum height=3.0em](fmogh) at (0pt, 0pt) {\textcolor{white}{\href{https://github.com/bsouthga/cv}{View on GitHub}}};
+    \node[fill=steelblue, text centered, minimum width=50em, minimum height=3.0em](fmogh) at (0pt, 0pt) {\textcolor{white}{\href{https://github.com/bsouthga/cv}{View source on GitHub}}};
     \draw[forkmefg!60, dashed, line width=.08em, dash pattern=on .5em off 1.5\pgflinewidth] (-25em,1.2em) rectangle (25em,-1.2em);
     \end{tikzpicture}
   };
@@ -179,8 +179,8 @@
         align=parright]
         \item[Phone] $ \vcentcolon= $ (650) 465 - 0225
         \item[Email] $ \vcentcolon= $ \href{mailto:bsouthga@gmail.com}{bsouthga@[urban.org (or) gmail.com]}
-        \item[Github] $ \vcentcolon= $ \href{github.com/bsouthga}{github.com/bsouthga}
-        \item[Blog] $ \vcentcolon= $ \href{bsou.io}{bsou.io}
+        \item[Github] $ \vcentcolon= $ \href{http://github.com/bsouthga}{github.com/bsouthga}
+        \item[Blog] $ \vcentcolon= $ \href{http://bsou.io}{bsou.io}
       \end{description}
     }
     \s{Education}{
