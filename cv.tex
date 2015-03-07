@@ -18,11 +18,11 @@
 \thispagestyle{empty}
 \setlength{\columnseprule}{0.5pt}
 \setlength{\columnsep}{25pt}
-\definecolor{steelblue}{HTML}{4682B4}
+\definecolor{steelblue}{HTML}{555555}
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlength\parindent{0pt}
 
-
+\setlength{\columnseprule}{0pt}
 
 % Add an entry to a section
 \newcommand{\entry}[4][1]{
@@ -40,12 +40,12 @@
   \end{description}
 }
 
-% New section 
+% New section
 \newcommand{\s}[2]{
   \vspace{2em}
   {
     \textcolor{steelblue}{\LARGE #1}
-  
+
     \hrulefill
   }
   #2
@@ -68,8 +68,8 @@
   \addplot [no markers, black, line width=1.5pt] table [y={create col/linear regression={y=y}}] {\loadedtable};
 
   \end{axis}
-  \end{tikzpicture}     
-  \hspace{5pt}  
+  \end{tikzpicture}
+  \hspace{5pt}
   \begin{tikzpicture}[thick]
   \begin{axis}[
       height=2.5cm,
@@ -90,7 +90,7 @@
 
   \end{axis}
   \end{tikzpicture}
-  \hspace{12pt}     
+  \hspace{12pt}
   \scalebox{0.6}{
     \begin{tikzpicture}
       \node (1) {};
@@ -110,8 +110,8 @@
       (5) edge (3)
       (6) edge (1);
 
-    \end{tikzpicture} 
-  }    
+    \end{tikzpicture}
+  }
 }
 
 % Actual Document content
@@ -137,9 +137,9 @@
     \pgfplotstablenew[columns={x,y}]{30}\loadedtable
 
   % Begin text of resume
-  \textcolor{steelblue}{\Huge Ben Southgate}{\hfill\graphs}
+  \textcolor{steelblue}{\Huge Ben Southgate}{\hfill }
 
-  \hrulefill
+  \vspace{2em}
 
   \begin{multicols}{2}
 
@@ -153,46 +153,45 @@
         \item[Phone] $ \vcentcolon= $ (650) 465 - 0225
         \item[Email] $ \vcentcolon= $ \href{mailto:bsouthga@gmail.com}{bsouthga@[urban.org (or) gmail.com]}
         \item[Github] $ \vcentcolon= $ \href{http://github.com/bsouthga}{github.com/bsouthga}
-        \item[Blog] $ \vcentcolon= $ \href{http://bsou.io}{bsou.io}
+        \item[Blog] $ \vcentcolon= $ \href{http://bsouth.ga}{bsouth.ga}
       \end{description}
     }
     \s{Education}{
 
       \entry{Carleton College}{2009-2013}{
-        \item[\bx] B.A., major in economics (\textit{magna cum laude})
-        \item[\bx] Received distinction in major and senior thesis from economics department.
-        \item[\bx] Coursework: Data Mining, Data Structures, Econometrics, Linear Algebra, Multi-variable Calculus      
+        \item[\bx] B.A., majored in economics (\textit{magna cum laude})
+        \item[\bx] Received departmental award and distinction for senior thesis in economics
+        \item[\bx] Coursework: Data Mining, Data Structures, Econometrics, Linear Algebra, Multi-variable Calculus
       }
-      \entry{George Washington University}{2014-present}{
-        \item[\bx] Grad. Cert. Mathematics (expected 2015)
-        \item[\bx] Coursework: Mathematical Statistics, Real Analysis      
+      \entry{George Washington University}{2014}{
+        \item[\bx] Part-time graduate coursework : Mathematical Statistics, Real Analysis
       }
     }
-    \s{Research Experience}{    
+    \s{Professional Experience}{
 
       \entry[The Urban Institute - Washington, DC]{Research Assistant}{2013-Present}{
-        \item[\bx] Quantitative research on retirement security and the welfare of older Americans
-        \item[\bx] Stata and SAS for survival analysis, group decomposition, (non) linear regression, and graphics generation
-        \item[\bx] Python for microsimulation, data cleaning and structure manipulation, and task automation, JavaScript for interactive data visualization development.
-      } 
+        \item[\bx] Conducted quantitative research on retirement security and the welfare of older Americans
+        \item[\bx] Used Stata and SAS for survival analysis, group decomposition, (non) linear regression, and graphics generation
+        \item[\bx] Used Python for microsimulation, data cleaning and structure manipulation, and task automation, JavaScript for interactive data visualization development
+      }
       \entry[University of Texas, Pop. Research Center - Austin, TX]{Research Assistant}{2012}{
         \item[\bx] Conducted primary research utilizing U.T. Austin freshman applicant data, resulting in a working paper entitled ``Race as a Consideration in the Creation of a Freshman Class: The University of Texas Case'' (co-author)
-        \item[\bx] Stata programming for various regression and descriptive analyses, as well as graphics generation
+        \item[\bx] Used Stata for various regression and descriptive analyses, as well as graphics generation
       }
     }
-    \s{Other Academic Experience}{  
+    \s{Academic Experience}{
 
       \entry[Carleton College - Northfield, MN]{Teaching Assistant}{2012-2013}{
         \item[\bx] Junior / Senior level Macroeconomic Theory Course (ECON 331), which included Growth Modeling, Dynamic Optimization, Interest Rate Targeting, and RBC Analysis
         \item[\bx] Ran review sessions, developed graphical and mathematical review material in \LaTeX{}, and conducted individual tutoring sessions
-      }     
+      }
     }
     \s{Selected Publications}{
 
       \entry{Independent Journals}{}{
         \item[\bx] Benjamin G. Southgate. ``LOOP and the Internet Marketplace'', \textit{Michigan Journal of Business}, Volume 7 Issue 1 (\textit{forthcoming})
       }
-      \entry{The Urban Institute}{}{
+      \entry{Urban Institute}{}{
         \item[\bx] Richard W. Johnson, Benjamin G. Southgate. ``How Will State and County Government Employees Fare under Kentucky's New Cash Balance Pension Plan?'', April 30, 2014
 
         \item[\bx] Richard W. Johnson, Barbara Butrica, Owen Haaga, Benjamin G. Southgate. ``When Do State and Local Pension Plans Encourage Workers to Retire?'', April 30, 2014
@@ -200,17 +199,18 @@
         \item[\bx] Richard W. Johnson, Barbara Butrica, Owen Haaga, Benjamin G. Southgate. ``How Long Must State and Local Employees Work to Accumulate Pension Benefits?'', April 30, 2014
       }
 
-    } 
+    }
     \s{Programming Experience}{
       \begin{description}[style=multiline,leftmargin=1.7cm,itemsep=1pt, align=parright]
         \small
-        \item [Python] | 3 years (Pandas / web scraping / DTW)
-        \item [Stata] | 3 years (Regression analysis / decomposition)
-        \item [\LaTeX] | 3 years (Sweave / Stata weaving)
-        \item [R] | 2 years (Regression analysis / data mining)
-        \item [Java] | 2 years (Data mining / academic exp.)
-        \item [SAS] | 1.5 years (Extensive macro programming)
-        \item [JavaScript] | 1 year (CoffeeScript / JQuery / D3 / Raphael) 
+        \item [Python] | 4 years (web scraping / Pandas / DTW)
+        \item [Stata] | 4 years (decomposition / regression analysis)
+        \item [\LaTeX] | 4 years (Sweave / Stata weaving)
+        \item [Unix Shell] | 3 years (make / AWK / sed)
+        \item [R] | 3 years (regression analysis / data mining)
+        \item [Java] | 2 years (data mining)
+        \item [SAS] | 2 years (extensive macro programming)
+        \item [JavaScript] | 2 years (CoffeeScript / D3 / JQuery)
       \end{description}
     }
   \end{multicols}
