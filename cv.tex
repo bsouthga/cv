@@ -4,9 +4,7 @@
 \usepackage{color}
 \usepackage{mathtools, amsmath, amssymb}
 \usepackage{ifthen}
-% Font
 \usepackage{cmbright}
-% Unecessary Plotting
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{lipsum}
@@ -18,7 +16,8 @@
 \thispagestyle{empty}
 \setlength{\columnseprule}{0.5pt}
 \setlength{\columnsep}{25pt}
-\definecolor{steelblue}{HTML}{555555}
+\definecolor{bengray}{HTML}{555555}
+\definecolor{steelblue}{HTML}{4682B4}
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlength\parindent{0pt}
 
@@ -44,7 +43,7 @@
 \newcommand{\s}[2]{
   \vspace{2em}
   {
-    \textcolor{steelblue}{\LARGE #1}
+    \textcolor{bengray}{\LARGE #1}
 
     \hrulefill
   }
@@ -52,92 +51,14 @@
 }
 
 % Bullet used in lists
-\newcommand\bx[0]{$\quad \scriptstyle \color{steelblue} \blacksquare$}
-
-% Plots in header
-\newcommand\graphs[0]{
-  \begin{tikzpicture}
-  \begin{axis}[
-      height=2.5cm,
-      width=4cm,
-      hide axis,
-      axis lines=left,
-      enlargelimits=false,
-  ]
-  \addplot [only marks, steelblue, mark size=1.5] table {\loadedtable};
-  \addplot [no markers, black, line width=1.5pt] table [y={create col/linear regression={y=y}}] {\loadedtable};
-
-  \end{axis}
-  \end{tikzpicture}
-  \hspace{5pt}
-  \begin{tikzpicture}[thick]
-  \begin{axis}[
-      height=2.5cm,
-      width=4cm,
-      hide axis,
-      axis lines=left,
-      enlargelimits=false,
-  ]
-  \addplot+ [no markers,
-            thick,
-            smooth,
-            domain=0:13,
-            fill=steelblue,
-            draw=white,
-            samples=100,
-            xbar=2pt,
-            hist={bins=6}] {rand};
-
-  \end{axis}
-  \end{tikzpicture}
-  \hspace{12pt}
-  \scalebox{0.6}{
-    \begin{tikzpicture}
-      \node (1) {};
-      \node (2) [below left of=1] {};
-      \node (3) [below right of=1] {};
-      \node (4) [above right of=3] {};
-      \node (5) [above of=3] {};
-      \node (6) [above left of=1] {};
+\newcommand\bx[0]{$\quad \scriptstyle \color{bengray} \blacksquare$}
 
 
-      \path
-      (1) edge (2)
-      (3) edge (2)
-      (1) edge (5)
-      (2) edge (4)
-      (5) edge (4)
-      (5) edge (3)
-      (6) edge (1);
-
-    \end{tikzpicture}
-  }
-}
 
 % Actual Document content
 \begin{document}
-    % Tikz Settings
-    \tikzset{
-        every node/.style={
-            circle,
-            draw,
-            solid,
-            fill=steelblue,
-            inner sep=0pt,
-            minimum size=.5cm
-        }
-    }
-    % Generate random data for regression figure
-    \pgfmathsetseed{1138} % set the random seed
-    \pgfplotstableset{ % Define the equations for x and y
-        create on use/x/.style={create col/expr={42-2*\pgfplotstablerow}},
-        create on use/y/.style={create col/expr={(0.6*\thisrow{x}+130)+15*rand}}
-    }
-    % create a new table with 30 rows and columns x and y:
-    \pgfplotstablenew[columns={x,y}]{30}\loadedtable
-
   % Begin text of resume
-  \textcolor{steelblue}{\Huge Ben Southgate}{\hfill }
+  \textcolor{bengray}{\Huge Ben Southgate}{\hfill }
 
   \vspace{2em}
 
@@ -151,9 +72,9 @@
         font=\normalfont,
         align=parright]
         \item[Phone] $ \vcentcolon= $ (650) 465 - 0225
-        \item[Email] $ \vcentcolon= $ \href{mailto:bsouthga@gmail.com}{bsouthga@gmail.com}
-        \item[Github] $ \vcentcolon= $ \href{http://github.com/bsouthga}{github.com/bsouthga}
-        \item[Blog] $ \vcentcolon= $ \href{http://bsou.io}{bsou.io}
+        \item[Email] $ \vcentcolon= $ \href{mailto:bsouthga@gmail.com}{\color{steelblue} bsouthga@gmail.com}
+        \item[Github] $ \vcentcolon= $ \href{http://github.com/bsouthga}{\color{steelblue} github.com/bsouthga}
+        \item[Blog] $ \vcentcolon= $ \href{https://bsou.io}{\color{steelblue} bsou.io}
       \end{description}
     }
     \s{Education}{
@@ -165,16 +86,21 @@
       }
       \entry{George Washington University}{2015-present}{
         \item[\bx] M.S., Statistics
-        \item[\bx] Coursework: Mathematical Statistics, Real Analysis, Analysis of Algorithms, Non-Parametric Models
+        \item[\bx] Coursework: Probability, Real Analysis, Analysis of Algorithms, Non-Parametrics, Stochastic Processes
       }
     }
     \s{Professional Experience}{
 
-      \entry[CrossLead - Washington, D.C.]{Software Engineer}{2015-Present}{
-        \item[\bx] Implemented graph theoretic algorithms for social network analysis
-        \item[\bx] Developed TypeScript based libraries to extend mongodb with graph database features
+      \entry[CrossLead - Washington, D.C.]{Software Engineer, L2}{2017-Present}{
+        \item[\bx] Designed / implemented public API (oauth2, OpenAPI spec, interactive documentation)
+        \item[\bx] Built TypeScript interface generator for custom mongodb schema library
+        \item[\bx] Drove migration of large JavaScript application (150 kloc) from vanilla ES5 to TypeScript
+      }
+
+      \entry[CrossLead - Washington, D.C.]{Software Engineer, L1}{2015-2017}{
+        \item[\bx] Implemented graph algorithms for network analysis
         \item[\bx] Developed AngularJS components for SPA
-        \item[\bx] Helped set up autoscaling infrastructure on AWS
+        \item[\bx] Helped set up AWS autoscaling / job queue
         \item[\bx] Worked with fully remote, international team
       }
 
@@ -183,8 +109,6 @@
         \item[\bx] Used Python for microsimulation, data cleaning and structure manipulation, and task automation, JavaScript for interactive data visualization development
       }
 
-      \vfill
-      \columnbreak
       \entry[University of Texas, Pop. Research Center - Austin, TX]{Research Assistant}{2012}{
         \item[\bx] Conducted primary research utilizing U.T. Austin freshman applicant data, resulting in a working paper
         \item[\bx] Used Stata for various regression and descriptive analyses, as well as graphics generation
@@ -197,26 +121,16 @@
         \item[\bx] Ran review sessions, developed graphical and mathematical review material in \LaTeX{}, and conducted individual tutoring sessions
       }
     }
-    \s{Selected Publications}{
-
-      \entry{Urban Institute}{}{
-        \item[\bx] Richard W. Johnson, Benjamin G. Southgate. ``How Will State and County Government Employees Fare under Kentucky's New Cash Balance Pension Plan?'', April 30, 2014
-
-        \item[\bx] Richard W. Johnson, Barbara Butrica, Owen Haaga, Benjamin G. Southgate. ``When Do State and Local Pension Plans Encourage Workers to Retire?'', April 30, 2014
-      }
-
-    }
     \s{Programming Experience}{
       \begin{description}[style=multiline,leftmargin=2cm,itemsep=1.5pt, align=parright]
         \small
-        \item [TypeScript] | 1 year (graph algorithms)
-        \item [JavaScript] | 3 years (BabelJS / NodeJS / D3 / Angular)
+        \item [TypeScript] | 2 year (React, NodeJS, Analysis)
+        \item [JavaScript] | 3 years (NodeJS / D3 / AngularJS)
         \item [Python] | 4 years (web scraping / Pandas / DTW)
-        \item [\LaTeX] | 4 years (Sweave / Stata weaving)
+        \item [\LaTeX] | 4 years (Sweave / Tikz / \href{http://github.com/bsouthga/cv}{\color{steelblue} Resumes})
         \item [Unix Shell] | 3 years (make / AWK / sed)
-        \item [R] | 2 years (regression analysis / data mining)
-        \item [Java] | 2 years (data mining)
-        \item [SAS] | 2 years (extensive macro programming)
+        \item [R] | 2 years (linear/tree/non-parametric)
+        \item [Java] | 2 years (academic work)
       \end{description}
     }
   \end{multicols}
